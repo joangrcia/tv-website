@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen text-gray-700">
+    <div class="mb-10 mt-5">
+      <h1 class="dark:text-white">My Product</h1>
+    </div>
+    <div class="flex flex-wrap justify-center items-center lg:justify-start lg:items-start">
+      {% for purchase in purchased_products %}
+      <div class="w-[143px] h-[253px] m-2 relative border rounded overflow-hidden text-center flex flex-col">
+        <!-- Gambar square -->
+        <div class="w-[143px] h-[143px]">
+          <img src="{{ purchase.product.photo.url }}" alt="Gambar Produk" class="w-full h-full object-cover rounded-t-md" />
+        </div>
+        <!-- Judul -->
+        <h1 class="text-sm font-semibold mt-2 px-2 dark:text-white">{{ purchase.product.title | truncatechars:13 }}</h1>
+        <!-- Rating -->
+        <ul class="flex items-center justify-center gap-1 px-2 mt-2">
+          {% for _ in 'x'|ljust:purchase.product.rating|default:0 %}
+          <li class="inline-block">
+            <i data-feather="star" class="fill-orange-300 stroke-none w-[15px] h-[15px]"></i>
+          </li>
+          {% endfor %}
+          <!-- Tambahkan bintang rating lainnya sesuai kebutuhan -->
+        </ul>
+        <!-- Tautan harga -->
+        <div class="grid grid-cols-2 absolute bottom-0 left-0 right-0">
+          <a href="{% url 'product:download_product' purchase.product.id %}" class="flex-1 bg-violet-600 text-white text-sm font-semibold py-2.5 transition-all duration-150 ease-linear hover:bg-violet-700 hover:text-white"> download </a>
+          <button type="button" class="bg-violet-500 border-violet-500 text-white hover:bg-violet-600 focus:ring ring-violet-50 focus:bg-violet-600" data-tw-toggle="modal" data-tw-target="#modal-id_form" data-product-id="{{ purchase.product.id }}" onclick="updateToken('{{ purchase.token }}')">Token</button>
+
+          <div class="modal relative z-50 hidden" id="modal-id_form" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="fixed inset-0 z-50 overflow-y-auto">
+              <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity modal-overlay"></div>
+              <div class="animate-translate p-4 sm:max-w-lg mx-auto">
+                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all dark:bg-zinc-600">
+                  <div class="bg-white dark:bg-zinc-700">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 border-transparent hover:bg-gray-50/50 hover:text-gray-900 dark:text-gray-100 rounded-lg text-sm px-2 py-1 ltr:ml-auto rtl:mr-auto inline-flex items-center dark:hover:bg-zinc-600" data-tw-dismiss="modal">
+                      <i class="mdi mdi-close text-xl text-gray-500 dark:text-zinc-100/60"></i>
+                    </button>
+                    <div class="p-5">
+                      <h3 class="mb-4 text-xl font-medium text-gray-700 dark:text-gray-100">Token Generator</h3>
+                      <div>
+                        <h1 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100 ltr:text-left rtl:text-right">Your Token</h1>
+                        <p id="token-display" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px" class="dark:text-white"></p>
+                      </div>
+                      <div class="mt-6">
+                        <button id="generate-token-btn" class="btn bg-red-600 text-white border-transparent w-full">Copy Token</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block myjs %}
+<script>
+  function updateToken(token) {
+    const tokenDisplay = document.getElementById("token-display");
+    tokenDisplay.innerText = token;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const generateTokenBtn = document.getElementById("generate-token-btn");
+
+    // Menyalin token ke clipboard
+    generateTokenBtn.addEventListener("click", function () {
+      const tokenDisplay = document.getElementById("token-display");
+      const tokenText = tokenDisplay.innerText;
+
+      // Membuat elemen textarea sementara untuk menyalin teks ke clipboard
+      const textarea = document.createElement("textarea");
+      textarea.value = tokenText;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+
+      // Memberikan umpan balik bahwa token telah disalin
+      alert("Token copied to clipboard: " + tokenText);
+    });
+  });
+</script>
+{% endblock myjs %}

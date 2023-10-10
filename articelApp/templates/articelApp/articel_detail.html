@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Blog - Tradervibes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    {% block meta %}
+    <meta name="description" content="{{ blog.content | safe }}">
+      <meta property="og:url" content="https://www.mql5.com/en/signals/1598419">
+      <meta property="og:title" content="{{ blog.title }}">
+      <meta property="og:description" content="{{ blog.content | safe }}">
+      <meta property="og:image" content="{{ blog.photo.url }}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="628">
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@trader-vibescom">
+      <meta name="twitter:image" content="{{ blog.photo.url }}">
+    {% endblock meta %}
+    <meta content="" name="Themesbrand" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+    <!-- alertifyjs Css -->
+        <link href="{% static '/libs/alertifyjs/build/css/alertify.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <link href="{% static '/libs/dropzone/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <!-- alertifyjs default themes  Css -->
+        <link href="{% static '/libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
+</head>
+<body>
+  <div class="page-content dark:bg-zinc-700">
+    <div class="container-fluid px-[0.625rem]">
+      <div class="grid grid-cols-1 mb-5">
+        <div class="flex items-center justify-between">
+          <h4 class="mb-sm-0 text-lg font-semibold grow text-gray-800 dark:text-gray-100">Blog Details</h4>
+          <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 ltr:md:space-x-3 rtl:md:space-x-0">
+              <li class="inline-flex items-center">
+                <a href="{% url "articel:blog_list" %}" class="inline-flex items-center text-sm font-medium text-gray-800 hover:text-gray-900 dark:text-zinc-100 dark:hover:text-white"> Blog </a>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <a href="#" class="ltr:ml-1 rtl:mr-1 text-sm font-medium text-gray-500 hover:text-gray-900 ltr:md:ml-2 rtl:md:mr-2 dark:text-gray-100 dark:hover:text-white">Blog Details</a>
+                </div>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-5">
+          <div class="col-span-12 xl:col-span-8">
+            <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+              <div class="card-body">
+                <div class="text-center mb-3">
+                  <h4 class="text-gray-700 text-21 dark:text-gray-100">{{ blog.title }}</h4>
+                </div>
+                <div class="mb-4"><img src="{{ blog.photo.url }}" alt="{{ blog.title }}" class="border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 mx-auto p-1 rounded" /></div>
+
+                <div class="grid grid-cols-12">
+                  <div class="col-span-4">
+                      <div class="text-center">
+                          <h6 class="mb-2 text-gray-700 dark:text-gray-100">Categories</h6>
+                          <ul class="list-unstyled">
+                              {% for category in blog.categories.all %}
+                              <li>
+                                  <p class="text-gray-500 dark:text-zinc-100 text-15 mb-3">{{ category.name }}</p>
+                              </li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-span-4">
+                      <div class="text-center">
+                          <h6 class="mb-2 text-gray-700 dark:text-gray-100">Date</h6>
+                          <p class="text-gray-500 dark:text-zinc-100 text-15 mb-3">{{ blog.date }}</p>
+                      </div>
+                  </div>
+                  <div class="col-span-4">
+                      <div class="text-center">
+                          <p class="text-gray-500 dark:text-zinc-100 mb-2">Post by</p>
+                          <h5 class="text-15 mb-3 text-gray-700 dark:text-gray-100">{{ blog.author }}</h5>
+                      </div>
+                  </div>
+              </div>
+
+                <hr class="my-4 border-gray-100 dark:border-zinc-600" />
+
+                <div class="mt-4">
+                  <div class="dark:text-zinc-100 text-14">
+                    {{ blog.content|safe }}
+                  </div>
+
+                  <hr class="my-5 border-gray-50 dark:border-zinc-600" />
+
+                  <div class="mt-8">
+                    <h5 class="text-15 text-gray-700 dark:text-gray-100"><i class="bx bx-message-dots align-middle mr-1"></i> Comments :</h5>
+                    <div class="mt-4">
+                      {% for comment in comments %}
+                      <div class="flex py-5 border-t border-gray-50 dark:border-zinc-600">
+                        <div class="flex-shrink-0 ltr:mr-4 rtl:ml-4">
+                          <div>
+                            <i class="bx bxs-user bg-violet-50/50 p-0.5 rounded-full text-violet-500 dark:bg-violet-500/30"></i>
+                          </div>
+                        </div>
+
+                        <div class="flex-grow">
+                          <h5 class="text-sm mb-1 dark:text-gray-100">{{ comment.author }}</h5>
+                          <p class="text-gray-500 dark:text-zinc-100">{{ comment.text }}</p>
+                        </div>
+                      </div>
+                      {% endfor %} {% comment %} sdfsf {% endcomment %}
+                    </div>
+                  </div>
+
+                  <hr class="border-gray-50 dark:border-zinc-600" />
+
+                  <div class="mt-8">
+                    <h5 class="font-size-16 mb-3 dark:text-gray-100">Leave a Reply:</h5>
+
+                    <form method="post" action="{% url 'articel:add_comment' blog.slug %}">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label class="font-medium text-gray-700 dark:text-gray-100">Message</label>
+                        {{ form.as_p }}
+                      </div>
+
+                      <div class="text-end">
+                        <button type="submit" class="btn w-28 bg-violet-500 border-transparent text-white shadow-md shadow-violet-200 focus:ring focus:ring-violet-100 dark:shadow-zinc-600">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 xl:col-span-4">
+            <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+              <div class="card-body">
+                <div class="mt-8">
+                  <h5 class="text-gray-700 dark:text-gray-100">Recently Added</h5>
+                  <div class="list-group">
+                    {% for article in recent_articles %}
+                    <a href="{% url 'articel:blog_detail' article.slug %}" class="pt-0 px-2">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 ltr:mr-4 rtl:ml-4">
+                          <img src="{{article.photo.url}}" alt="" class="w-16 h-auto rounded" />
+                        </div>
+                        <div class="flex-grow">
+                          <h5 class="text-13 text-gray-700 dark:text-gray-100">{{article.title}}</h5>
+                          <p class="mb-0 mt-1 text-gray-500 dark:text-zinc-100">{{article.date}}</p>
+                        </div>
+                        <div class="text-4xl text-gray-500 dark:text-zinc-100">
+                          <i class="mdi mdi-calendar"></i>
+                        </div>
+                      </div>
+                    </a>
+                    <hr class="border-gray-50 dark:border-zinc-600" />
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="mt-8">
+                  <h5 class="mb-4 text-gray-700 dark:text-gray-100">Tags</h5>
+                  <div class="flex flex-wrap gap-2 px-2">
+                    {% for tag in tags %}
+                    <a href="#" class="text-13"><span class="bg-violet-50/50 text-violet-500 px-1 py-0.5 rounded font-medium dark:bg-violet-500/20">{{tag}}</span></a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Start -->
+      <!--<footer class="footer absolute bottom-0 right-0 left-0 border-t border-gray-50 py-5 px-5 bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-200">-->
+      <!--  <div class="grid grid-cols-2">-->
+      <!--    <div class="grow">-->
+      <!--      &copy;-->
+      <!--      <script>-->
+      <!--        document.write(new Date().getFullYear());-->
+      <!--      </script>-->
+      <!--      TraderVibes-->
+      <!--    </div>-->
+      <!--    <div class="hidden md:inline-block text-end">Design & Develop by <a href="" class="text-violet-500 underline">Tradervibes</a></div>-->
+      <!--  </div>-->
+      <!--</footer>-->
+      <!-- end Footer -->
+    </div>
+  </div>
+</div>
+<script src="{% static '/libs/@popperjs/core/umd/popper.min.js' %}"></script>
+<script src="{% static '/libs/feather-icons/feather.min.js' %}"></script>
+<script src="{% static '/libs/metismenujs/metismenujs.min.js' %}"></script>
+<script src="{% static '/libs/simplebar/simplebar.min.js' %}"></script>
+<script src="{% static '/libs/feather-icons/feather.min.js' %}"></script>
+
+<!-- alertifyjs js -->
+    <script src="{% static '/libs/alertifyjs/build/alertify.min.js' %}"></script>
+
+    <!-- notification init -->
+    <script src="{% static '/js/pages/notification.init.js' %}"></script>
+
+    <!-- dropzone js -->
+    <script src="{% static '/libs/dropzone/min/dropzone.min.js' %}"></script>
+
+<script src="{% static '/js/app.js' %}"></script>
+</body>
+</html>

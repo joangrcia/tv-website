@@ -1,0 +1,146 @@
+{% extends "base.html" %} {% load static %} {% block title %}Articel{% endblock title %} {% block meta %} {% endblock meta %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <div class="container-fluid px-[0.625rem]">
+      <div class="grid grid-cols-1 mb-5">
+        <div class="flex items-center justify-between">
+          <h4 class="mb-sm-0 text-lg font-semibold grow text-gray-800 dark:text-gray-100">Articel</h4>
+          <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 ltr:md:space-x-3 rtl:md:space-x-0">
+              <li class="inline-flex items-center">
+                <a href="/" class="inline-flex items-center text-sm font-medium text-gray-800 hover:text-gray-900 dark:text-zinc-100 dark:hover:text-white"> Dashboard </a>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <a href="#" class="ltr:ml-1 rtl:mr-1 text-sm font-medium text-gray-500 hover:text-gray-900 ltr:md:ml-2 rtl:md:mr-2 dark:text-gray-100 dark:hover:text-white">Articel</a>
+                </div>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="grid grid-cols-1">
+        <div class="grid grid-cols-12 items-stretch mb-4">
+          <div class="col-span-12 lg:col-span-6 self-center">
+            <h5 class="text-15 text-gray-600 dark:text-gray-100">Blog List <span class="text-gray-500 font-normal ml-2 dark:text-zinc-100">({{ blog_count }})</span></h5>
+          </div>
+          <div class="col-span-12 lg:col-span-6">
+            <div class="flex flex-wrap items-center gap-2 mt-5 lg:mt-0 lg:justify-end">
+              <div>
+                <a href="#" class="btn bg-gray-50 border-gray-50 dark:bg-zinc-600/50 dark:border-zinc-600 dark:text-gray-100"><i class="bx bx-plus me-1"></i> Add New</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-5">
+          {% for blog in page_obj %}
+          <div class="col-span-12 lg:col-span-6 xl:col-span-4">
+            <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+              <div>
+                <img src="{{ blog.photo.url }}" alt="{{ blog.title }}" class="img-fluid" />
+              </div>
+              <div class="card-body">
+                <p class="text-gray-400 dark:text-zinc-100 mb-2">{{ blog.date }}</p>
+                <h5><a href="{% url 'articel:blog_detail' blog.slug %}" class="text-gray-700 dark:text-gray-100">{{ blog.title }}</a></h5>
+                <div class="mb-0 mt-1 text-15 text-gray-700 dark:text-zinc-100">{{ blog.content|truncatechars:200|safe}}</div>
+                <div class="mt-4">
+                  <a href="{% url 'articel:blog_detail' blog.slug %}" class="align-middle text-violet-500 text-15">Read more <i class="mdi mdi-chevron-right align-middle"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="mb-5">
+          <div class="flex justify-center">
+            <nav aria-label="Page navigation example border">
+              <ul class="flex list-style-none">
+                {% if page_obj.has_previous %}
+                <li class="border ltr:rounded-l rtl:rounded-r border-gray-100 dark:border-zinc-500 dark:bg-zinc-800">
+                  <a class="page-link relative block py-2 px-3 border-0 bg-transparent outline-none transition-all duration-300 text-gray-500 hover:text-violet-500 hover:bg-gray-50/50 dark:hover:bg-zinc-500/50 dark:hover:text-gray-100 focus:shadow-none" href="?page={{ page_obj.previous_page_number }}"><i class="mdi mdi-chevron-left"></i></a>
+                </li>
+                {% else %}
+                <li class="border ltr:rounded-l rtl:rounded-r border-gray-100 dark:border-zinc-500 dark:bg-zinc-800" disabled>
+                  <a class="page-link relative block py-2 px-3 border-0 bg-transparent outline-none transition-all duration-300 text-gray-100 hover:text-violet-500 focus:shadow-none hover:bg-gray-200 dark:hover:bg-zinc-500/50 dark:hover:text-gray-100 pointer-events-none" href=""><i class="mdi mdi-chevron-left"></i></a>
+                </li>
+                {% endif %} {% for num in page_range %} {% if blogs.number == num %}
+                <li class="border border-l-0 border-r-0 border-violet-500 group hover:border-gray-200 transition-all duration-300 dark:border-zinc-500 dark:bg-zinc-800">
+                  <a class="page-link relative block py-2 px-3 border-0 group-hover bg-violet-500 outline-none text-white hover:text-violet-500 group-hover:bg-gray-200 dark:hover:bg-zinc-500/50 dark:hover:text-gray-100 focus:shadow-none transition-all duration-300" href="">{{ num }}</a>
+                </li>
+                {% else %}
+                <li class="border border-l-0 border-r-0 border-gray-100 dark:border-zinc-500 dark:bg-zinc-800">
+                  <a class="page-link relative block py-2 px-3 border-0 bg-transparent outline-none transition-all duration-300 text-gray-500 hover:text-violet-500 hover:bg-gray-50/50 dark:hover:bg-zinc-500/50 dark:hover:text-gray-100 focus:shadow-none" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endif %} {% endfor %} {% if page_obj.has_next %}
+                <li class="border ltr:rounded-r rtl:rounded-l border-gray-100 dark:border-zinc-500 dark:bg-zinc-800">
+                  <a class="page-link relative block py-2 px-3 border-0 bg-transparent outline-none transition-all duration-300 text-gray-500 hover:text-violet-500 hover:bg-gray-50/50 dark:hover:bg-zinc-500/50 dark:hover:text-gray-100 focus:shadow-none" href="?page={{ page_obj.next_page_number }}"><i class="mdi mdi-chevron-right"></i></a>
+                </li>
+                {% else %}
+                <li class="border ltr:rounded-r rtl:rounded-l border-gray-100 dark:border-zinc-500 dark:bg-zinc-800" disabled>
+                  <a class="page-link relative block py-2 px-3 border-0 bg-transparent outline-none transition-all duration-300 text-gray-100 hover:text-violet-500 focus:shadow-none hover:bg-gray-200 dark:hover:bg-zinc-500/50 dark:hover:text-gray-100 pointer-events-none" href=""><i class="mdi mdi-chevron-right"></i></a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Start -->
+      <!-- end Footer -->
+    </div>
+  </div>
+  <footer class="footer absolute bottom-0 right-0 left-0 border-t border-gray-50 py-5 px-5 bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-200">
+    <div class="grid grid-cols-2">
+      <div class="grow">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        TraderVibes
+      </div>
+      <div class="hidden md:inline-block text-end">Design & Develop by <a href="" class="text-violet-500 underline">Tradervibes</a></div>
+    </div>
+  </footer>
+</div>
+{% endblock content %} {% comment %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <h1>Daftar Blog</h1>
+    <ul>
+      {% for blog in page_obj %}
+      <li>
+        <div class="article">
+          {% if blog.photo %}
+          <img src="{{ blog.photo.url }}" alt="{{ blog.title }} Image" width="200" />
+          {% endif %}
+          <h2><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h2>
+          <p>Tanggal Pembuatan: {{ blog.date }}</p>
+          <p>{{ blog.content|truncatechars:200 }}</p>
+          <a href="{% url 'blog_detail' blog.pk %}">Read More</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="pagination">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current-page"> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+</div>
+{% endcomment %}

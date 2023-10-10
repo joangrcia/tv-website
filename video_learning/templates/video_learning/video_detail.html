@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <h1 class="dark:text-white mb-5">E-Course <span class="text-violet-500">Vibes</span></h1>
+    <div class="flex flex-col gap-5 lg:flex-row">
+      <div class="lg:w-[70%]">
+        <img src="{{videos.image.url}}" alt="" />
+        <div class="card-body">
+          <h1 class="font-light text-5xl my-5 dark:text-white">{{videos.title}}</h1>
+          <p class="dark:text-zinc-300">{{videos.description}}</p>
+        </div>
+      </div>
+      <div class="w-full lg:w-1/3">
+        <div class="card-body">
+          <h1 class="dark:text-white font-light text-xl">Topic Series</h1>
+        </div>
+        {% for season, episodes in season_episodes.items %}
+        <div class="card overflow-hidden mb-0">
+          <div class="faq bg-white dark:bg-zinc-800">
+            <div class="card-body" onclick="toggleFaqAnswer(this)" style="cursor: pointer">
+              <div class="faq-item">
+                <div class="faq-question flex justify-between">
+                  <h3 class="text-xl dark:text-white font-light flex gap-2 justify-center items-center">
+                    <span><i data-feather="play-circle"></i></span>{{videos.title}} - season {{ season.season_number }}
+                  </h3>
+                  <button class="dark:text-white">
+                    <i data-feather="arrow-down"></i>
+                  </button>
+                </div>
+                <div class="faq-answer hidden">
+                  {% for episode in episodes %}
+                  <div class="border-b-2 hover:bg-zinc-200 active:bg-zinc-200" style="cursor: pointer" onclick="window.location='{% url 'evideo:episode_detail' video_slug=videos.slug season_number=season.season_number slugEpisode=episode.slug %}';">
+                    <div class="card-body">
+                      <p class="dark:text-white flex gap-2 items-center">
+                        <span><i data-feather="play"></i></span>{{videos.title}} - {{episode.title}}
+                      </p>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block myjs %}
+<script>
+  function toggleFaqAnswer(cardBody) {
+    var faqAnswer = cardBody.querySelector(".faq-answer");
+    faqAnswer.classList.toggle("hidden");
+  }
+</script>
+{% endblock myjs %}

@@ -1,0 +1,389 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <div class="container-fluid px-[0.625rem]">
+      <div class="grid grid-cols-1 mb-5">
+        <div class="flex items-center justify-between">
+          <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 ltr:md:space-x-3 rtl:md:space-x-0">
+              <li class="inline-flex items-center">
+                <a href="#" class="inline-flex items-center text-sm font-medium text-gray-800 hover:text-gray-900 dark:text-zinc-100 dark:hover:text-white"> Dashboard </a>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-4 place-items-center gap-2 lg:flex lg:justify-evenly h-[219px] lg:h-[119px]">
+        <a href="{% url 'indexprofile' %}" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="user" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">profile</h1>
+        </a>
+        <a href="{% url 'notfound' %}" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="copy" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">Copy Trade</h1>
+        </a>
+        <a href="/blog/category/analysis/" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="bar-chart" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">Analisa</h1>
+        </a>
+        <a href="{% url 'notfound' %}" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="grid" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">Services</h1>
+        </a>
+        <a href="{% url 'event:event_list' %}" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="file-text" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">event</h1>
+        </a>
+        <a href="{% url 'articel:blog_list' %}" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="layout" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">article</h1>
+        </a>
+        <a href="{% url 'notfound' %}" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="help-circle" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">Help</h1>
+        </a>
+        <a href="{% url 'evideo:video_list' %}" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center p-1 h-full w-full gap-2 lg:w-full hover:bg-violet-300 dark:hover:bg-violet-500">
+          <i data-feather="play-circle" class="dark:stroke-white" class="dark:stroke-white"></i>
+          <h1 class="text-center text-sm font-light dark:text-white">video</h1>
+        </a>
+      </div>
+
+      <div class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center">
+        <h1 class="self-start ml-5 mt-5 font-normal text-xl dark:text-white">Market Watch</h1>
+        <div class="my-3 flex w-full flex-col items-center justify-center gap-3 bg-white dark:bg-zinc-800 2xl:flex-row overflow-hidden">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container mt-5 hidden md:block">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+                  {
+                  "width": 770,
+                  "height": 400,
+                  "currencies": [
+                  "EUR",
+                  "USD",
+                  "JPY",
+                  "GBP",
+                  "CHF",
+                  "AUD",
+                  "CAD",
+                  "NZD"
+                  ],
+                  "isTransparent": false,
+                  "colorTheme": "dark",
+                  "locale": "en"
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container mt-5 hidden md:block">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                  {
+                  "symbols": [
+                  [
+                      "OANDA:XAUUSD|1D"
+                  ],
+                  [
+                      "FX:GBPJPY|1D"
+                  ],
+                  [
+                      "FX:EURUSD|1D"
+                  ]
+                  ],
+                  "chartOnly": false,
+                  "width": 770,
+                  "height": 400,
+                  "locale": "en",
+                  "colorTheme": "dark",
+                  "autosize": false,
+                  "showVolume": false,
+                  "showMA": false,
+                  "hideDateRanges": false,
+                  "hideMarketStatus": false,
+                  "hideSymbolLogo": false,
+                  "scalePosition": "right",
+                  "scaleMode": "Normal",
+                  "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+                  "fontSize": "10",
+                  "noTimeScale": false,
+                  "valuesTracking": "1",
+                  "changeMode": "price-and-percent",
+                  "chartType": "area",
+                  "maLineColor": "#2962FF",
+                  "maLineWidth": 1,
+                  "maLength": 9,
+                  "lineWidth": 2,
+                  "lineType": 0,
+                  "dateRanges": [
+                  "1d|1",
+                  "1m|30",
+                  "3m|60",
+                  "12m|1D",
+                  "60m|1W",
+                  "all|1M"
+                  ]
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container my-5 md:hidden">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                  {
+                  "colorTheme": "dark",
+                  "dateRange": "12M",
+                  "showChart": true,
+                  "locale": "en",
+                  "largeChartUrl": "",
+                  "isTransparent": false,
+                  "showSymbolLogo": true,
+                  "showFloatingTooltip": false,
+                  "width": 300,
+                  "height": 660,
+                  "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+                  "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+                  "gridLineColor": "rgba(42, 46, 57, 0)",
+                  "scaleFontColor": "rgba(134, 137, 147, 1)",
+                  "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+                  "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+                  "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+                  "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+                  "symbolActiveColor": "rgba(41, 98, 255, 0.12)",
+                  "tabs": [
+                  {
+                      "title": "Indices",
+                      "symbols": [
+                      {
+                          "s": "FOREXCOM:SPXUSD",
+                          "d": "S&P 500"
+                      },
+                      {
+                          "s": "FOREXCOM:NSXUSD",
+                          "d": "US 100"
+                      },
+                      {
+                          "s": "FOREXCOM:DJI",
+                          "d": "Dow 30"
+                      },
+                      {
+                          "s": "INDEX:NKY",
+                          "d": "Nikkei 225"
+                      },
+                      {
+                          "s": "INDEX:DEU40",
+                          "d": "DAX Index"
+                      },
+                      {
+                          "s": "FOREXCOM:UKXGBP",
+                          "d": "UK 100"
+                      }
+                      ],
+                      "originalTitle": "Indices"
+                  },
+                  {
+                      "title": "Futures",
+                      "symbols": [
+                      {
+                          "s": "CME_MINI:ES1!",
+                          "d": "S&P 500"
+                      },
+                      {
+                          "s": "CME:6E1!",
+                          "d": "Euro"
+                      },
+                      {
+                          "s": "COMEX:GC1!",
+                          "d": "Gold"
+                      },
+                      {
+                          "s": "NYMEX:CL1!",
+                          "d": "Oil"
+                      },
+                      {
+                          "s": "NYMEX:NG1!",
+                          "d": "Gas"
+                      },
+                      {
+                          "s": "CBOT:ZC1!",
+                          "d": "Corn"
+                      }
+                      ],
+                      "originalTitle": "Futures"
+                  },
+                  {
+                      "title": "Bonds",
+                      "symbols": [
+                      {
+                          "s": "CME:GE1!",
+                          "d": "Eurodollar"
+                      },
+                      {
+                          "s": "CBOT:ZB1!",
+                          "d": "T-Bond"
+                      },
+                      {
+                          "s": "CBOT:UB1!",
+                          "d": "Ultra T-Bond"
+                      },
+                      {
+                          "s": "EUREX:FGBL1!",
+                          "d": "Euro Bund"
+                      },
+                      {
+                          "s": "EUREX:FBTP1!",
+                          "d": "Euro BTP"
+                      },
+                      {
+                          "s": "EUREX:FGBM1!",
+                          "d": "Euro BOBL"
+                      }
+                      ],
+                      "originalTitle": "Bonds"
+                  },
+                  {
+                      "title": "Forex",
+                      "symbols": [
+                      {
+                          "s": "FX:EURUSD",
+                          "d": "EUR to USD"
+                      },
+                      {
+                          "s": "FX:GBPUSD",
+                          "d": "GBP to USD"
+                      },
+                      {
+                          "s": "FX:USDJPY",
+                          "d": "USD to JPY"
+                      },
+                      {
+                          "s": "FX:USDCHF",
+                          "d": "USD to CHF"
+                      },
+                      {
+                          "s": "FX:AUDUSD",
+                          "d": "AUD to USD"
+                      },
+                      {
+                          "s": "FX:USDCAD",
+                          "d": "USD to CAD"
+                      }
+                      ],
+                      "originalTitle": "Forex"
+                  }
+                  ]
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+      </div>
+
+      <div class="card dark:bg-zinc-800 dark:border-zinc-600 overflow-hidden">
+        <div class="flex items-center p-5 gap-2 bg-slate-50 dark:bg-zinc-900">
+          <i data-feather="briefcase" class="dark:stroke-white"></i>
+          <h1 class="text-lg font-normal dark:text-white">Broker Partner</h1>
+        </div>
+        <div class="flex flex-col lg:flex-row justify-center items-center">
+          <div class="flex flex-col lg:flex-row justify-center items-center mb-[1.25rem] lg:w-1/2">
+            <div class="flex flex-col justify-center items-center md:w-[50%]">
+              <img src="{% static '/images/pngwing.com.png' %}" alt="User" height="60%" width="60%" />
+              <a href="#">
+                <p class="text-violet-500 underline">Tentang Broker Kami</p>
+              </a>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mt-5 w-full px-5">
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+            </div>
+          </div>
+          <div class="flex flex-col lg:flex-row justify-center items-center mb-[1.25rem] lg:w-1/2">
+            <div class="flex flex-col justify-center items-center md:w-[50%]">
+              <img src="{% static '/images/pngwing.com.png' %}" alt="User" height="60%" width="60%" />
+              <a href="#">
+                <p class="text-violet-500 underline">Tentang Broker Kami</p>
+              </a>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mt-5 w-full px-5">
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+              <a href="#" class="card dark:bg-zinc-800 dark:border-zinc-600 flex flex-col justify-center items-center gap-3 p-5 hover:bg-violet-300 dark:hover:bg-violet-500">
+                <i data-feather="user" class="dark:stroke-white"></i>
+                <h1 class="text-center text-sm font-light dark:text-white">Req. Account</h1>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card dark:bg-zinc-800 dark:border-zinc-600 p-5">
+        <div class="flex flex-col gap-2 md:flex-row">
+        {% for ad in ads %}
+          <div class="md:w-1/2">
+            <img src="{{ ad.image.url }}" alt="Ad image" />
+          </div>
+         {% endfor %}
+        </div>
+      </div>
+
+      <!-- Footer Start -->
+      <footer class="footer absolute bottom-0 right-0 left-0 border-t border-gray-50 py-5 px-5 bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-200">
+        <div class="grid grid-cols-2">
+          <div class="grow">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            TraderVibes
+          </div>
+          <div class="hidden md:inline-block text-end">Design & Develop by <a href="" class="text-violet-500 underline">Tradervibes</a></div>
+        </div>
+      </footer>
+      <!-- end Footer -->
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <div class="card-body">
+      <h1 class="dark:text-white text-2xl md:text-3xl lg:text-4xl">E-Course <span class="text-violet-500">Vibes</span></h1>
+    </div>
+
+    <h4 class="my-2 dark:text-white text-lg md:text-xl lg:text-2xl">Basic</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:h-full xl:flex xl:h-[400px] scrollbar-thumb-orange-500 scrollbar overflow-x-auto scrollbar-track-gray-700 py-3">
+      {% for video in basic %}
+      <div class="aspect-square flex flex-col justify-center items-center px-4 md:px-7 xl:px-5">
+        <div class="border-red-200 h-1/2 aspect-video">
+          <img src="{{video.image.url}}" alt="" />
+        </div>
+        <h3 class="dark:text-white text-lg pt-2 md:pt-3 self-start">{{ video.title }}</h3>
+        <p class="self-start mb-2 md:mb-3 text-zinc-200 dark:text-white">Jumlah Episode: {{ video.jumlah_episode }}</p>
+        <a href="{% url 'evideo:video_detail' video.slug %}" class="btn self-start text-white bg-violet-500 border-violet-500 hover:bg-violet-600 hover:border-violet-600 focus:bg-violet-600 focus:border-violet-600 focus:ring focus:ring-violet-500/30 active:bg-violet-600 active:border-violet-600">Watch Now</a>
+      </div>
+      {% endfor %}
+    </div>
+    <h4 class="my-2 dark:text-white text-lg md:text-xl lg:text-2xl">Intermediate</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:h-full xl:flex xl:h-[400px] scrollbar-thumb-orange-500 scrollbar overflow-x-auto scrollbar-track-gray-700 py-3">
+      {% for video in inter %}
+      <div class="aspect-square flex flex-col justify-center items-center px-4 md:px-7 xl:px-5">
+        <div class="border-red-200 h-1/2 aspect-video">
+          <img src="{{video.image.url}}" alt="" />
+        </div>
+        <h3 class="dark:text-white text-lg pt-2 md:pt-3 self-start">{{ video.title }}</h3>
+        <p class="self-start mb-2 md:mb-3 text-zinc-200 dark:text-white">Jumlah Episode: {{ video.jumlah_episode }}</p>
+        <a href="{% url 'evideo:video_detail' video.slug %}" class="btn self-start text-white bg-violet-500 border-violet-500 hover:bg-violet-600 hover:border-violet-600 focus:bg-violet-600 focus:border-violet-600 focus:ring focus:ring-violet-500/30 active:bg-violet-600 active:border-violet-600">Watch Now</a>
+      </div>
+      {% endfor %}
+    </div>
+    <h4 class="my-2 dark:text-white text-lg md:text-xl lg:text-2xl">Mastery</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:h-full xl:flex xl:h-[400px] scrollbar-thumb-orange-500 scrollbar overflow-x-auto scrollbar-track-gray-700 py-3">
+      {% for video in master %}
+      <div class="aspect-square flex flex-col justify-center items-center px-4 md:px-7 xl:px-5">
+        <div class="border-red-200 h-1/2 aspect-video">
+          <img src="{{video.image.url}}" alt="" />
+        </div>
+        <h3 class="dark:text-white text-lg pt-2 md:pt-3 self-start">{{ video.title }}</h3>
+        <p class="self-start mb-2 md:mb-3 text-zinc-200 dark:text-white">Jumlah Episode: {{ video.jumlah_episode }}</p>
+        <a href="{% url 'evideo:video_detail' video.slug %}" class="btn self-start text-white bg-violet-500 border-violet-500 hover:bg-violet-600 hover:border-violet-600 focus:bg-violet-600 focus:border-violet-600 focus:ring focus:ring-violet-500/30 active:bg-violet-600 active:border-violet-600">Watch Now</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

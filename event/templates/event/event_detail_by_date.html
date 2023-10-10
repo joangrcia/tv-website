@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <div class="card p-8 shadow">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="event-image qn-event-image"><img src="{{event.image.url}}" alt="{{ event.title }}" class="w-full rounded-lg shadow-lg" /></div>
+          <div class="event-details qn-event-details">
+            <h2 class="qn-event-title text-3xl text-gray-700 dark:text-zinc-100 font-semibold mb-4">{{event.title}}</h2>
+            <div class="flex mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-gray-700 dark:text-zinc-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              <span class="event-date text-gray-700 dark:text-zinc-100">{{ event.date }}</span>
+            </div>
+            <p class="qn-event-description text-gray-700 dark:text-zinc-100 text-lg leading-relaxed mb-4">{{ event.description }}</p>
+            <div class="mb-4">
+              <p class="event-time text-gray-700 dark:text-zinc-100"><strong>Waktu:</strong> {{ event.time }}</p>
+              <p class="event-location text-gray-700 dark:text-zinc-100"><strong>Lokasi:</strong> {{ event.location }}</p>
+              <p class="event-speaker text-gray-700 dark:text-zinc-100"><strong>Pengisi Acara:</strong> {{ event.speaker }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

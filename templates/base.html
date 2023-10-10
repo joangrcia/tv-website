@@ -1,0 +1,529 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock title %} - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    {% block meta %}
+    
+    {% endblock meta %}
+    <meta content="" name="Themesbrand" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+    <!-- alertifyjs Css -->
+        <link href="{% static '/libs/alertifyjs/build/css/alertify.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <link href="{% static '/libs/dropzone/min/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <!-- alertifyjs default themes  Css -->
+        <link href="{% static '/libs/alertifyjs/build/css/themes/default.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
+
+    {% block myheaderjs %}
+    {% endblock myheaderjs %}
+</head>
+    
+<body data-mode="light" data-sidebar-size="md">
+
+
+    <!-- leftbar-tab-menu -->
+    <nav class="border-b border-slate-100 dark:bg-zinc-800 print:hidden flex items-center fixed top-0 right-0 left-0 bg-white z-10 dark:border-zinc-700">
+
+        <div class="flex items-center justify-between w-full">
+            <div class="topbar-brand flex items-center">
+                <div class="navbar-brand flex items-center justify-between shrink px-5 h-[70px] border-r bg-slate-50 border-r-gray-50 dark:border-zinc-700 dark:bg-zinc-800">
+                    <a href="/" class="flex items-center font-bold text-lg  dark:text-white">
+                        <img src="{% static '/images/logo-sm.svg' %}" alt="" class="ltr:mr-2 rtl:ml-2 inline-block mt-1 h-6" />
+                        <span class="hidden xl:block align-middle">TraderVibes</span>
+                    </a>
+                </div>
+                <button type="button" class="text-gray-600 dark:text-white h-[70px] ltr:-ml-10 ltr:mr-6 rtl:-mr-10 rtl:ml-10 vertical-menu-btn" id="vertical-menu-btn">
+                    <i class="fa fa-fw fa-bars"></i>
+                </button>
+                <form class="app-search hidden xl:block px-5">
+                    <div class="relative inline-block">
+                        <input type="text" class="bg-gray-50/30 dark:bg-zinc-700/50 border-0 rounded focus:ring-0 placeholder:text-sm px-4 dark:placeholder:text-gray-200 dark:text-gray-100 dark:border-zinc-700 " placeholder="Search...">
+                        <button class="py-1.5 px-2.5 text-white bg-violet-500 inline-block absolute ltr:right-1 top-1 rounded shadow shadow-violet-100 dark:shadow-gray-900 rtl:left-1 rtl:right-auto" type="button"><i class="bx bx-search-alt align-middle"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="flex items-center">
+
+                <div>
+                    <div class="dropdown relative sm:hidden block">
+                        <button type="button" class="text-xl px-4 h-[70px] text-gray-600 dark:text-gray-100 dropdown-toggle" data-dropdown-toggle="navNotifications">
+                            <i data-feather="search" class="h-5 w-5"></i>
+                        </button>
+                    
+                        <div class="dropdown-menu absolute px-4 -left-35 top-0 mx-4 w-72 z-50 hidden list-none border border-gray-50 rounded bg-white shadow dark:bg-zinc-800 dark:border-zinc-600 dark:text-gray-300" id="navNotifications">
+                            <form class="py-3 dropdown-item" aria-labelledby="navNotifications">
+                                <div class="form-group m-0">
+                                    <div class="flex w-full">
+                                        <input type="text" class="border-gray-100 dark:border-zinc-600 dark:text-zinc-100 w-fit" placeholder="Search ..." aria-label="Search Result">
+                                        <button class="btn btn-primary border-l-0 rounded-l-none bg-violet-500 border-transparent text-white" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown relative language hidden sm:block">
+                    <button class="btn border-0 py-0 dropdown-toggle px-4 h-[70px]" type="button" aria-expanded="false" data-dropdown-toggle="navNotifications">
+                        <img src="{% static '/images/flags/us.jpg' %}" alt="" class="h-4" id="header-lang-img">
+                    </button>
+                    <div class="dropdown-menu absolute -left-24 z-50 hidden w-40 list-none rounded bg-white shadow dark:bg-zinc-800" id="navNotifications">
+                        <ul class="border border-gray-50 dark:border-gray-700" aria-labelledby="navNotifications">
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-50/50 dark:text-gray-200 dark:hover:bg-zinc-600/50 dark:hover:text-white"><img src="{% static '/images/flags/us.jpg' %}" alt="user-image" class="mr-1 inline-block h-3"> <span class="align-middle">English</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-50/50 dark:text-gray-200 dark:hover:bg-zinc-600/50 dark:hover:text-white"><img src="{% static '/images/flags/spain.jpg' %}" alt="user-image" class="mr-1 inline-block h-3"> <span class="align-middle">Spanish</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-50/50 dark:text-gray-200 dark:hover:bg-zinc-600/50 dark:hover:text-white"><img src="{% static '/images/flags/germany.jpg' %}" alt="user-image" class="mr-1 inline-block h-3"> <span class="align-middle">German</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-50/50 dark:text-gray-200 dark:hover:bg-zinc-600/50 dark:hover:text-white"><img src="{% static '/images/flags/italy.jpg' %}" alt="user-image" class="mr-1 inline-block h-3"> <span class="align-middle">Italian</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="button" class="light-dark-mode text-xl px-4 h-[70px] text-gray-600 dark:text-gray-100 hidden sm:block ">
+                        <i data-feather="moon" class="h-5 w-5 block dark:hidden"></i>
+                        <i data-feather="sun" class="h-5 w-5 hidden dark:block"></i>
+                </div>
+
+                <div>
+                    <div class="dropdown relative text-gray-600 hidden sm:block">
+                        <button type="button" class="btn border-0 h-[70px] text-xl px-4 dropdown-toggle dark:text-gray-100" data-bs-toggle="dropdown" id="dropdownMenuButton1">
+                             <i data-feather="grid" class="h-5 w-5"></i>
+                        </button>
+                        <div class="dropdown-menu absolute -left-40 z-50 hidden w-72 list-none border border-gray-50 rounded bg-white shadow dark:bg-zinc-800 dark:border-zinc-600 dark:text-gray-300" aria-labelledby="dropdownMenuButton1">
+                            <div class="p-2">
+                                <div class="grid grid-cols-3">
+                                    <a class="dropdown-item hover:bg-gray-50/50 py-4 text-center dark:hover:bg-zinc-700/50 dark:hover:text-gray-50" href="#">
+                                        <img src="{% static '/images/brands/github.png' %}" class="mb-2 mx-auto h-6" alt="Github">
+                                        <span>GitHub</span>
+                                    </a>
+                                        <a class="dropdown-item hover:bg-gray-50/50 py-4 text-center dark:hover:bg-zinc-700/50 dark:hover:text-gray-50" href="#">
+                                        <img src="{% static '/images/brands/bitbucket.png' %}" class="mb-2 mx-auto h-6" alt="Github">
+                                        <span>Bitbucket</span>
+                                    </a>
+                                        <a class="dropdown-item hover:bg-gray-50/50 py-4 text-center dark:hover:bg-zinc-700/50 dark:hover:text-gray-50" href="#">
+                                        <img src="{% static '/images/brands/dribbble.png' %}" class="mb-2 mx-auto h-6" alt="Github">
+                                        <span>Dribbble</span>
+                                    </a>
+                                </div>
+                                    <div class="grid grid-cols-3">
+                                    <a class="dropdown-item hover:bg-gray-50/50 py-4 text-center dark:hover:bg-zinc-700/50 dark:hover:text-gray-50" href="#">
+                                        <img src="{% static '/images/brands/dropbox.png' %}" class="mb-2 mx-auto h-6" alt="Github">
+                                        <span>Dropbox</span>
+                                    </a>
+                                        <a class="dropdown-item hover:bg-gray-50/50 py-4 text-center dark:hover:bg-zinc-700/50 dark:hover:text-gray-50" href="#">
+                                        <img src="{% static '/images/brands/mail_chimp.png' %}" class="mb-2 mx-auto h-6" alt="Github">
+                                        <span>Mail Chimp</span>
+                                    </a>
+                                        <a class="dropdown-item hover:bg-gray-50/50 py-4 text-center dark:hover:bg-zinc-700/50 dark:hover:text-gray-50" href="#">
+                                        <img src="{% static '/images/brands/slack.png' %}" class="mb-2 mx-auto h-6" alt="Github">
+                                        <span>Slack</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="dropdown relative ">
+                        <div class="relative">
+                            <button type="button" class="btn border-0 h-[70px] dropdown-toggle px-4 text-gray-500 dark:text-gray-100" aria-expanded="false" data-dropdown-toggle="notification">
+                                <i data-feather="bell" class="h-5 w-5"></i>
+                            </button>
+                                <span class="absolute text-xs px-1.5 bg-red-500 text-white font-medium rounded-full left-6 top-2.5">5</span>
+                        </div>
+                        <div class="dropdown-menu absolute z-50 hidden w-80 list-none rounded bg-white shadow dark:bg-zinc-800 " id="notification">
+                            <div class="border border-gray-50 dark:border-gray-700 rounded" aria-labelledby="notification">
+                                <div class="grid grid-cols-12 p-4">
+                                    <div class="col-span-6">
+                                        <h6 class="m-0 text-gray-700 dark:text-gray-100"> Notifications </h6>
+                                    </div>
+                                    <div class="col-span-6 justify-self-end">
+                                        <a href="#!" class="text-xs underline dark:text-gray-400"> Unread (3)</a>
+                                    </div>
+                                </div>
+                                <div class="max-h-56" data-simplebar>
+                                    <div>
+                                        <a href="#!" class="text-reset notification-item">
+                                            <div class="flex px-4 py-2 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
+                                                <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
+                                                    <img src="{% static '/images/users/avatar-3.jpg' %}" class="rounded-full h-8 w-8" alt="user-pic">
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <h6 class="mb-1 text-gray-700 dark:text-gray-100">James Lemire</h6>
+                                                    <div class="text-13 text-gray-600">
+                                                        <p class="mb-1 dark:text-gray-400">It will seem like simplified English.</p>
+                                                        <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-400"></i> <span>1 hour ago</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#!" class="text-reset notification-item">
+                                            <div class="flex px-4 py-2 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
+                                                <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
+                                                    <div class="h-8 w-8 bg-violet-500 rounded-full text-center">
+                                                        <i class="bx bx-cart text-xl leading-relaxed text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <h6 class="mb-1 text-gray-700 dark:text-gray-100">Your order is placed</h6>
+                                                    <div class="text-13 text-gray-600">
+                                                        <p class="mb-1 dark:text-gray-400">If several languages coalesce the grammar</p>
+                                                        <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-400"></i> <span>3 min ago</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#!" class="text-reset notification-item">
+                                            <div class="flex px-4 py-2 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
+                                                <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
+                                                    <div class="h-8 w-8 bg-green-500 rounded-full text-center">
+                                                        <i class="bx bx-badge-check text-xl leading-relaxed text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <h6 class="mb-1 text-gray-700 dark:text-gray-100">Your item is shipped</h6>
+                                                    <div class="text-13 text-gray-600">
+                                                        <p class="mb-1 dark:text-gray-400">If several languages coalesce the grammar</p>
+                                                        <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-400"></i> <span>3 min ago</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#!" class="text-reset notification-item">
+                                            <div class="flex px-4 py-2 hover:bg-gray-50/50 dark:hover:bg-zinc-700/50">
+                                                <div class="flex-shrink-0 ltr:mr-3 rtl:ml-3">
+                                                    <img src="{% static '/images/users/avatar-6.jpg' %}" class="rounded-full h-8 w-8" alt="user-pic">
+                                                </div>
+                                                <div class="flex-grow">
+                                                    <h6 class="mb-1 text-gray-700 dark:text-gray-100">Salena Layfield</h6>
+                                                    <div class="text-13 text-gray-600">
+                                                        <p class="mb-1 dark:text-gray-400">As a skeptical Cambridge friend of mine occidental.</p>
+                                                        <p class="mb-0"><i class="mdi mdi-clock-outline dark:text-gray-400"></i> <span>1 hour ago</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="p-1 border-t grid border-gray-50 dark:border-zinc-600 justify-items-center">
+                                    <a class="btn border-0 text-violet-500" href="javascript:void(0)">
+                                        <i class="mdi mdi-arrow-right-circle mr-1"></i> <span>View More..</span> 
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div>
+                    <div class="dropdown relative ltr:mr-4 rtl:ml-4">
+                        <button type="button" class="flex items-center px-4 py-5 border-x border-gray-50 bg-gray-50/30 dropdown-toggle dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-100" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <img class="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{{ request.user.account.profile_image.url }}" alt="Header Avatar">
+                            <span class="fw-medium hidden xl:block">{{request.user.get_full_name}}</span>
+                            <i class="mdi mdi-chevron-down align-bottom hidden xl:block"></i>
+                        </button>
+                        <div class="dropdown-menu absolute top-0 ltr:-left-3 rtl:-right-3 z-50 hidden w-40 list-none rounded bg-white shadow dark:bg-zinc-800" id="profile/log">
+                            <div class="border border-gray-50 dark:border-zinc-600" aria-labelledby="navNotifications">
+                                <div class="dropdown-item dark:text-gray-100">
+                                    <a class="px-3 py-2 hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50" href="{% url 'indexprofile' %}">
+                                        <i class="mdi mdi-face-man text-16 align-middle mr-1"></i> Profile
+                                    </a>
+                                </div>
+                                <hr class="border-gray-50 dark:border-gray-700">
+                                <div class="dropdown-item dark:text-gray-100">
+                                    <a class="p-3 hover:bg-gray-50/50 block dark:hover:bg-zinc-700/50" href="{% url 'dashboard:logout' %}">
+                                        <i class="mdi mdi-logout text-16 align-middle mr-1"></i> Logout
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+            <div class="hidden">
+                <div class="fixed inset-0 bg-black/40 transition-opacity z-40"></div>
+                <div class="h-screen z-50 bg-white fixed w-80 right-0" data-simplebar>
+                    <div class="flex items-center p-4 border-b border-gray-100">
+                        <h5 class="m-0 mr-2">Theme Customizer</h5>
+                        <a href="javascript:void(0);" class="h-6 w-6 text-center bg-gray-700 ml-auto rounded-full" >
+                            <i class="mdi mdi-close text-15 align-middle text-white leading-relaxed"></i>
+                        </a>
+                    </div>
+                    <div class="p-4">
+                        <h6 class="mb-3">Layout</h6>
+                        <div class="flex gap-4">
+                            <div>
+                                <input class="focus:ring-0" checked type="radio" name="layout" id="layout-vertical" value="vertical">
+                                <label class="align-middle" for="layout-vertical">Vertical</label>
+                            </div>
+                            <div>
+                                <input class="focus:ring-0" type="radio" name="layout" id="layout-horizontal" value="horizontal">
+                                <label class="align-middle" for="layout-horizontal">Horizontal</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3 pt-2">Layout Mode</h6>
+                        <div class="flex gap-4">
+                            <div>
+                                <input class="focus:ring-0" checked type="radio" name="layout-mode" id="layout-mode-light" value="light">
+                                <label class="form-check-label" for="layout-mode-light">Light</label>
+                            </div>
+                            <div>
+                                <input class="focus:ring-0" type="radio" name="layout-mode" id="layout-mode-dark" value="dark">
+                                <label class="form-check-label" for="layout-mode-dark">Dark</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3 pt-2">Layout Width</h6>
+
+                        <div class="flex gap-4">
+                            <div>
+                                <input class="focus:ring-0" checked type="radio" name="layout-width" id="layout-width-fuild" value="fuild" onchange="document.body.setAttribute('data-layout-size', 'fluid')">
+                                <label class="form-check-label" for="layout-width-fuild">Fluid</label>
+                            </div>
+                            <div>
+                                <input class="focus:ring-0" type="radio" name="layout-width" id="layout-width-boxed" value="boxed" onchange="document.body.setAttribute('data-layout-size', 'boxed')">
+                                <label class="form-check-label" for="layout-width-boxed">Boxed</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3 pt-2">Layout Position</h6>
+                        <div class="flex gap-4">
+                            <div>
+                                <input class="focus:ring-0" checked type="radio" name="layout-position" id="layout-position-fixed" value="fixed" onchange="document.body.setAttribute('data-layout-scrollable', 'false')">
+                                <label class="form-check-label" for="layout-position-fixed">Fixed</label>
+                            </div>
+                            <div>
+                                <input class="focus:ring-0" checked type="radio" name="layout-position" id="layout-position-scrollable" value="scrollable" onchange="document.body.setAttribute('data-layout-scrollable', 'true')">
+                                <label class="form-check-label" for="layout-position-scrollable">Scrollable</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3 pt-2">Topbar Color</h6>
+                        <div class="flex gap-4">
+                            <div>
+                                <input class="focus:ring-0" checked type="radio" name="topbar-color" id="topbar-color-light" value="light" onchange="document.body.setAttribute('data-topbar', 'light')">
+                                <label class="form-check-label" for="topbar-color-light">Light</label>
+                            </div>
+                            <div>
+                                <input class="focus:ring-0" type="radio" name="topbar-color" id="topbar-color-dark" value="dark" onchange="document.body.setAttribute('data-topbar', 'dark')">
+                                <label class="form-check-label" for="topbar-color-dark">Dark</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Size</h6>
+
+                        <div class="space-y-1">
+                            <div class="form-check sidebar-setting">
+                                <input class="focus:ring-0" checked type="radio" name="sidebar-size" id="sidebar-size-default" value="default" onchange="document.body.setAttribute('data-sidebar-size', 'lg')">
+                                <label class="form-check-label" for="sidebar-size-default">Default</label>
+                            </div>
+                            <div class="form-check sidebar-setting">
+                                <input class="focus:ring-0" type="radio" name="sidebar-size" id="sidebar-size-compact" value="compact" onchange="document.body.setAttribute('data-sidebar-size', 'md')">
+                                <label class="form-check-label" for="sidebar-size-compact">Compact</label>
+                            </div>
+                            <div class="form-check sidebar-setting">
+                                <input class="focus:ring-0" type="radio" name="sidebar-size" id="sidebar-size-small" value="small" onchange="document.body.setAttribute('data-sidebar-size', 'sm')">
+                                <label class="form-check-label" for="sidebar-size-small">Small (Icon View)</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Color</h6>
+                        <div class="space-y-1">
+                            <div class="form-check sidebar-setting">
+                                <input class="focus:ring-0" checked type="radio" name="sidebar-color" id="sidebar-color-light" value="light" onchange="document.body.setAttribute('data-sidebar', 'light')">
+                                <label class="form-check-label" for="sidebar-color-light">Light</label>
+                            </div>
+                            <div class="form-check sidebar-setting">
+                                <input class="focus:ring-0" type="radio" name="sidebar-color" id="sidebar-color-dark" value="dark" onchange="document.body.setAttribute('data-sidebar', 'dark')">
+                                <label class="form-check-label" for="sidebar-color-dark">Dark</label>
+                            </div>
+                            <div class="form-check sidebar-setting">
+                                <input class="focus:ring-0" type="radio" name="sidebar-color" id="sidebar-color-brand" value="brand" onchange="document.body.setAttribute('data-sidebar', 'brand')">
+                                <label class="form-check-label" for="sidebar-color-brand">Brand</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mt-4 mb-3 pt-2">Direction</h6>
+                        <div class="space-y-1">
+                            <div>
+                                <input class="focus:ring-0" checked type="radio" name="layout-direction" id="layout-direction-ltr" value="ltr">
+                                <label class="form-check-label" for="layout-direction-ltr">LTR</label>
+                            </div>
+                            <div>
+                                <input class="focus:ring-0" type="radio" name="layout-direction" id="layout-direction-rtl" value="rtl">
+                                <label class="form-check-label" for="layout-direction-rtl">RTL</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="vertical-menu rtl:right-0 fixed ltr:left-0 bottom-0 top-16 h-screen border-r bg-slate-50 border-gray-50 print:hidden dark:bg-zinc-800 dark:border-neutral-700 z-10">
+      <div data-simplebar class="h-full">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+          <!-- Left Menu Start -->
+          <ul class="metismenu" id="side-menu">
+            l
+            <li class="menu-heading px-4 py-3.5 text-xs font-medium text-gray-500 cursor-default" data-key="t-menu">Menu</li>
+
+            <li>
+              <a href="/" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
+                <i data-feather="home"></i>
+                <span data-key="t-dashboard"> Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'event:event_list' %}" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
+                <i data-feather="file-text"></i>
+                <span data-key="t-dashboard"> Event</span>
+              </a>
+            </li>
+            <!--<li>-->
+            <!--  <a href="{% url 'notfound' %}" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">-->
+            <!--    <i data-feather="copy"></i>-->
+            <!--    <span data-key="t-dashboard"> Copy Trading</span>-->
+            <!--  </a>-->
+            <!--</li>-->
+            <li>
+              <a href="{% url "articel:blog_list" %}" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
+                <i data-feather="tablet"></i>
+                <span data-key="t-dashboard"> Articel</span>
+              </a>
+            </li>
+            <li>
+              <a href="/blog/category/analysis/" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
+                <i data-feather="radio"></i>
+                <span data-key="t-dashboard"> Analysis</span>
+              </a>
+            </li>
+            <!--<li>-->
+            <!--  <a href="{% url 'notfound' %}" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">-->
+            <!--    <i data-feather="bar-chart"></i>-->
+            <!--    <span data-key="t-dashboard"> Signal Provider</span>-->
+            <!--  </a>-->
+            <!--</li>-->
+            <li>
+              <a href="{% url 'evideo:video_list' %}" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
+                <i data-feather="layout"></i>
+                <span data-key="t-dashboard"> E-Course</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'product:my_products' %}" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
+                <i data-feather="shopping-bag"></i>
+                <span data-key="t-dashboard">My Product</span>
+              </a>
+            </li>
+            <li class="menu-heading px-4 py-3 text-xs font-medium text-gray-500 cursor-default" data-key="t-elements">Market</li>
+
+            <li>
+              <a href="javascript: void(0);" aria-expanded="false" class="nav-menu pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white"> <i data-feather="life-buoy"></i><span data-key="t-pages">MQL4</span> </a>
+              <ul>
+                <li>
+                  <a href="/market/products/?category=Expert&product_type=mql4&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Expert</a>
+                </li>
+                <li>
+                  <a href="/market/products/?category=Indicators&product_type=mql4&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Indicator</a>
+                </li>
+                <li>
+                  <a href="/market/products/?category=Liblaries&product_type=mql4&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Liblaries</a>
+                </li>
+                <li>
+                  <a href="/market/products/?category=Utilities&product_type=mql4&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Utilities</a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="javascript: void(0);" aria-expanded="false" class="nav-menu pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white"> <i data-feather="life-buoy"></i><span data-key="t-pages">MQL5</span> </a>
+              <ul>
+                <li>
+                  <a href="/market/products/?category=Expert&product_type=mql5&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Expert</a>
+                </li>
+                <li>
+                  <a href="/market/products/?category=Indicators&product_type=mql5&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Indicator</a>
+                </li>
+                <li>
+                  <a href="/market/products/?category=Liblaries&product_type=mql5&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Liblaries</a>
+                </li>
+                <li>
+                  <a href="/market/products/?category=Utilities&product_type=mql5&price_filter=paid" class="pl-14 pr-4 py-2 block text-[13.5px] font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">Utilities</a>
+                </li>
+              </ul>
+            </li>
+            
+            <li>
+              <a href="/market/products/?category=E-Book&product_type=&price_filter=paid" class="pl-6 pr-4 py-3 block text-sm font-medium text-gray-700 transition-all duration-150 ease-linear hover:text-violet-500 dark:text-gray-300 dark:active:text-white dark:hover:text-white">
+                <i data-feather="book"></i>
+                <span data-key="t-dashboard">E-Books</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Sidebar -->
+      </div>
+    </div>
+    <!-- Left Sidebar End -->
+
+    {% block content %}
+    
+    {% endblock content %}
+
+        <div class="fixed ltr:right-5 rtl:left-5 bottom-10 flex flex-col gap-3 z-40 animate-bounce">
+            <!-- light-dark mode button -->
+            <a href="javascript: void(0);" id="ltr-rtl" class="px-3.5 py-4 z-40 text-14 transition-all duration-300 ease-linear text-white bg-violet-500 hover:bg-violet-600 rounded-full font-medium" onclick="changeMode(event)">
+                <span class="ltr:hidden">LTR</span>
+                <span  class="rtl:hidden">RTL</span>
+            </a>  
+        </div> 
+
+    <script src="{% static '/libs/@popperjs/core/umd/popper.min.js' %}"></script>
+    <script src="{% static '/libs/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static '/libs/metismenujs/metismenujs.min.js' %}"></script>
+    <script src="{% static '/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static '/libs/feather-icons/feather.min.js' %}"></script>
+
+    <!-- alertifyjs js -->
+        <script src="{% static '/libs/alertifyjs/build/alertify.min.js' %}"></script>
+
+        <!-- notification init -->
+        <script src="{% static '/js/pages/notification.init.js' %}"></script>
+
+        <!-- dropzone js -->
+        <script src="{% static '/libs/dropzone/min/dropzone.min.js' %}"></script>
+
+    <script src="{% static '/js/app.js' %}"></script>
+
+    {% block myjs %}
+    {% endblock myjs %}
+</body>
+</html>

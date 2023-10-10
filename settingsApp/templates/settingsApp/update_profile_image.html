@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <h2>Update Profile Image</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.profile_image.label_tag }} {{ form.profile_image }}
+      <button type="submit">Update</button>
+    </form>
+    <a href="{% url 'indexprofile' %}">Back to Profile</a>
+  </div>
+</div>
+{% endblock %}

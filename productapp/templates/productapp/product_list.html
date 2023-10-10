@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% load static %}{% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen text-gray-700">
+    <div class="container-fluid px-[0.625rem]">
+      <div class="mb-10 mt-5">
+        <h1 class="text-2xl dark:text-white"><span class="text-violet-500">TraderVibes</span> Technical Indicators, Expert Advisor, and E-Book</h1>
+        <p class="dark:text-white">{% if category == 'Indicators' and product_type == 'mql5' %} Signals from technical indicators play a crucial role in opening and closing deals on stock and Forex markets. The essence of indicators is a mathematical transformation of a financial symbol price aimed at forecasting future price changes. Test technical indicators to better predict market behavior and profit from it. {% else %} Expert Advisors analyze quotes of financial instruments, as well as execute trade operations on the Forex and stock markets. Test free and paid Expert Advisors to automate your trading and make it more profitable. {% endif %}</p>
+      </div>
+      <div class="card grid grid-cols-2 justify-center place-items-center w-1/2 overflow-hidden">
+        <div id="paid-filter" style="cursor: pointer" class="bg-slate-50 hover:bg-slate-100 w-full dark:bg-zinc-700 hover:dark:bg-zinc-600">
+          <h4 class="text-center font-light dark:text-white">Paid</h4>
+        </div>
+        <div id="free-filter" style="cursor: pointer" class="bg-slate-50 hover:bg-slate-100 w-full dark:bg-zinc-700 hover:dark:bg-zinc-600">
+          <h4 class="text-center font-light dark:text-white">Free</h4>
+        </div>
+      </div>
+      <div class="flex flex-wrap justify-center items-center lg:justify-start lg:items-start">
+      {% for product in products %}
+          <div class="w-[143px] h-[253px] m-2 relative border rounded overflow-hidden text-center">
+            <!-- Gambar square -->
+            <div class="w-[143px] h-[143px]">
+              <img src="{{ product.photo.url }}" alt="Gambar Produk" class="w-full h-full object-cover rounded-t-md" />
+            </div>
+            <!-- Judul -->
+            <h1 class="text-sm font-semibold mt-2 px-2 dark:text-white">{{ product.title|truncatechars:13 }}</h1>
+            <!-- Rating -->
+            <ul class="flex items-center justify-center gap-1 px-2 mt-2">
+              {% for _ in 'x'|ljust:product.rating|default:0 %}
+              <li class="inline-block">
+                <i data-feather="star" class="fill-orange-300 stroke-none w-[15px] h-[15px]"></i>
+              </li>
+              {% endfor %}
+              <!-- Tambahkan bintang rating lainnya sesuai kebutuhan -->
+            </ul>
+            <!-- Tautan harga -->
+            <a href="{% url 'product:purchase_product' product.id %}" class="absolute bottom-0 left-0 right-0 bg-violet-600 text-white text-sm font-semibold py-2.5 transition-all duration-150 ease-linear hover:bg-violet-700 hover:text-white">
+              ${{ product.price }}
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      <footer class="footer absolute bottom-0 right-0 left-0 border-t border-gray-50 py-5 px-5 bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-200">
+        <div class="grid grid-cols-2">
+          <div class="grow">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            TraderVibes
+          </div>
+          <div class="hidden md:inline-block text-end">Design & Develop by <a href="" class="text-violet-500 underline">Tradervibes</a></div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block myjs %}
+<script>
+  document.getElementById("free-filter").addEventListener("click", function () {
+    const currentUrl = window.location.href;
+    const newUrl = updateQueryStringParameter(currentUrl, "price_filter", "free");
+    window.location.href = newUrl;
+  });
+
+  document.getElementById("paid-filter").addEventListener("click", function () {
+    const currentUrl = window.location.href;
+    const newUrl = updateQueryStringParameter(currentUrl, "price_filter", "paid");
+    window.location.href = newUrl;
+  });
+
+  function updateQueryStringParameter(uri, key, value) {
+    const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    const separator = uri.indexOf("?") !== -1 ? "&" : "?";
+    if (uri.match(re)) {
+      return uri.replace(re, "$1" + key + "=" + value + "$2");
+    } else {
+      return uri + separator + key + "=" + value;
+    }
+  }
+</script>
+
+{% endblock myjs %}

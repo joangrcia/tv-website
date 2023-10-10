@@ -1,0 +1,272 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="main-content">
+  <div class="page-content dark:bg-zinc-700 min-h-screen">
+    <div class="container-fluid px-[0.625rem]">
+      <div class="grid grid-cols-1 mb-5">
+        <div class="flex items-center justify-between">
+          <h4 class="mb-sm-0 text-lg font-semibold grow text-gray-800 dark:text-gray-100">Starter Page</h4>
+          <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 ltr:md:space-x-3 rtl:md:space-x-0">
+              <li class="inline-flex items-center">
+                <a href="#" class="inline-flex items-center text-sm font-medium text-gray-800 hover:text-gray-900 dark:text-zinc-100 dark:hover:text-white"> Components </a>
+              </li>
+              <li>
+                <div class="flex items-center">
+                  <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  <a href="#" class="ltr:ml-1 rtl:mr-1 text-sm font-medium text-gray-500 hover:text-gray-900 ltr:md:ml-2 rtl:md:mr-2 dark:text-gray-100 dark:hover:text-white">Starter Page</a>
+                </div>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <h1 class="text-sm dark:text-gray-100">Account Connect Metatrader 5</h1>
+            <div class="w-[10px] h-[10px] rounded-full {% if metatrader.is_token_filled %}bg-green-600{% else %}bg-red-600{% endif %}"></div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <img src="{% static '/images/logos/metatrader5.png' %}" alt="" width="25px" height="25px" />
+            <i data-feather="share-2" class="stroke-1 dark:stroke-white"></i>
+          </div>
+        </div>
+        <form method="post" id="myForm">
+          {% csrf_token %}
+          <div class="card-body grid grid-cols-4 gap-2">
+            <div class="mb-4">
+              <label for="example-text-input" class="block font-medium text-gray-700 dark:text-gray-100 mb-2">Login</label>
+              {{ form.login }}
+            </div>
+            <div class="mb-4">
+              <label for="example-text-input" class="block font-medium text-gray-700 dark:text-gray-100 mb-2">Password Master</label>
+              {{ form.password }}
+            </div>
+            <div class="mb-4">
+              <label for="example-text-input" class="block font-medium text-gray-700 dark:text-gray-100 mb-2">IP</label>
+              {{ form.ip_address }}
+            </div>
+            <div class="mb-4">
+              <label for="example-text-input" class="block font-medium text-gray-700 dark:text-gray-100 mb-2">Port</label>
+              {{ form.port }}
+            </div>
+            <button type="submit" id="button1" value="Save" class="btn text-white bg-violet-500 border-violet-500 hover:bg-violet-600 hover:border-violet-600 focus:bg-violet-600 focus:border-violet-600 focus:ring focus:ring-violet-500/30 active:bg-violet-600 active:border-violet-600">Connect</button>
+            <button type="button" id="disconnectButton" class="btn text-white bg-red-500 border-red-500 hover:bg-red-600 hover:border-red-600 focus:bg-red-600 focus:border-red-600 focus:ring focus:ring-red-500/30 active:bg-red-600 active:border-red-600">Disconnect</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-body">
+        <h1 class="text-xl dark:text-gray-100">Signal Providers</h1>
+      </div>
+
+      <div class="grid grid-cols-3 gap-2">
+        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+          <div class="card-body">
+            <div>
+              <div class="grid grid-cols-12 gap-5 items-center">
+                <div class="col-span-6">
+                  <div class="flex items-center">
+                    <img class="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{% static '/images/users/avatar-1.jpg' %}" alt="Header Avatar" />
+                    <span class="text-gray-700 dark:text-zinc-100">CopyTrade1</span>
+                  </div>
+                  <h4 class="my-4 text-xl text-gray-800 dark:text-gray-100">
+                    $
+                    <span class="counter-value" data-target="865.2">865.2</span>
+                    k
+                  </h4>
+                </div>
+                <div class="col-span-6">
+                  <h1 class="text-2xl py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">110% Profit History</h1>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">+ $20.9k</span>
+              <span class="ltr:ml-1.5 rtl:mr-1.5 text-gray-700 text-13 dark:text-zinc-100">Since last week</span>
+            </div>
+          </div>
+        </div>
+        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+          <div class="card-body">
+            <div>
+              <div class="grid grid-cols-12 gap-5 items-center">
+                <div class="col-span-6">
+                  <div class="flex items-center">
+                    <img class="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{% static '/images/users/avatar-1.jpg' %}" alt="Header Avatar" />
+                    <span class="text-gray-700 dark:text-zinc-100">CopyTrade1</span>
+                  </div>
+                  <h4 class="my-4 text-xl text-gray-800 dark:text-gray-100">
+                    $
+                    <span class="counter-value" data-target="865.2">865.2</span>
+                    k
+                  </h4>
+                </div>
+                <div class="col-span-6">
+                  <h1 class="text-2xl py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">110% Profit History</h1>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">+ $20.9k</span>
+              <span class="ltr:ml-1.5 rtl:mr-1.5 text-gray-700 text-13 dark:text-zinc-100">Since last week</span>
+            </div>
+          </div>
+        </div>
+        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+          <div class="card-body">
+            <div>
+              <div class="grid grid-cols-12 gap-5 items-center">
+                <div class="col-span-6">
+                  <div class="flex items-center">
+                    <img class="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{% static '/images/users/avatar-1.jpg' %}" alt="Header Avatar" />
+                    <span class="text-gray-700 dark:text-zinc-100">CopyTrade1</span>
+                  </div>
+                  <h4 class="my-4 text-xl text-gray-800 dark:text-gray-100">
+                    $
+                    <span class="counter-value" data-target="865.2">865.2</span>
+                    k
+                  </h4>
+                </div>
+                <div class="col-span-6">
+                  <h1 class="text-2xl py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">110% Profit History</h1>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">+ $20.9k</span>
+              <span class="ltr:ml-1.5 rtl:mr-1.5 text-gray-700 text-13 dark:text-zinc-100">Since last week</span>
+            </div>
+          </div>
+        </div>
+        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+          <div class="card-body">
+            <div>
+              <div class="grid grid-cols-12 gap-5 items-center">
+                <div class="col-span-6">
+                  <div class="flex items-center">
+                    <img class="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{% static '/images/users/avatar-1.jpg' %}" alt="Header Avatar" />
+                    <span class="text-gray-700 dark:text-zinc-100">CopyTrade1</span>
+                  </div>
+                  <h4 class="my-4 text-xl text-gray-800 dark:text-gray-100">
+                    $
+                    <span class="counter-value" data-target="865.2">865.2</span>
+                    k
+                  </h4>
+                </div>
+                <div class="col-span-6">
+                  <h1 class="text-2xl py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">110% Profit History</h1>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">+ $20.9k</span>
+              <span class="ltr:ml-1.5 rtl:mr-1.5 text-gray-700 text-13 dark:text-zinc-100">Since last week</span>
+            </div>
+          </div>
+        </div>
+        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+          <div class="card-body">
+            <div>
+              <div class="grid grid-cols-12 gap-5 items-center">
+                <div class="col-span-6">
+                  <div class="flex items-center">
+                    <img class="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{% static '/images/users/avatar-1.jpg' %}" alt="Header Avatar" />
+                    <span class="text-gray-700 dark:text-zinc-100">CopyTrade1</span>
+                  </div>
+                  <h4 class="my-4 text-xl text-gray-800 dark:text-gray-100">
+                    $
+                    <span class="counter-value" data-target="865.2">865.2</span>
+                    k
+                  </h4>
+                </div>
+                <div class="col-span-6">
+                  <h1 class="text-2xl py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">110% Profit History</h1>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">+ $20.9k</span>
+              <span class="ltr:ml-1.5 rtl:mr-1.5 text-gray-700 text-13 dark:text-zinc-100">Since last week</span>
+            </div>
+          </div>
+        </div>
+        <div class="card dark:bg-zinc-800 dark:border-zinc-600">
+          <div class="card-body">
+            <div>
+              <div class="grid grid-cols-12 gap-5 items-center">
+                <div class="col-span-6">
+                  <div class="flex items-center">
+                    <img class="h-8 w-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{% static '/images/users/avatar-1.jpg' %}" alt="Header Avatar" />
+                    <span class="text-gray-700 dark:text-zinc-100">CopyTrade1</span>
+                  </div>
+                  <h4 class="my-4 text-xl text-gray-800 dark:text-gray-100">
+                    $
+                    <span class="counter-value" data-target="865.2">865.2</span>
+                    k
+                  </h4>
+                </div>
+                <div class="col-span-6">
+                  <h1 class="text-2xl py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">110% Profit History</h1>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs py-[1px] px-1 bg-green-50/60 text-green-500 rounded font-medium dark:bg-green-500/30">+ $20.9k</span>
+              <span class="ltr:ml-1.5 rtl:mr-1.5 text-gray-700 text-13 dark:text-zinc-100">Since last week</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Start -->
+      <footer class="footer absolute bottom-0 right-0 left-0 border-t border-gray-50 py-5 px-5 bg-white dark:bg-zinc-700 dark:border-zinc-600 dark:text-gray-200">
+        <div class="grid grid-cols-2">
+          <div class="grow">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            TraderVibes
+          </div>
+          <div class="hidden md:inline-block text-end">Design & Develop by <a href="" class="text-violet-500 underline">Tradervibes</a></div>
+        </div>
+      </footer>
+      <!-- end Footer -->
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block myjs %}
+<script>
+  document.getElementById("disconnectButton").addEventListener("click", function () {
+    // Lakukan permintaan AJAX untuk menghapus token dari server
+    fetch("{% url 'copytrade:disconnect_metatrader' %}", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle respons dari server jika diperlukan
+        if (data.success) {
+          // Tindakan yang perlu dilakukan jika berhasil
+          alert("Disconnected successfully!");
+          // Reload halaman setelah 2 detik (atau waktu yang sesuai)
+          setTimeout(function () {
+            location.reload();
+          }, 1000); // 2000 milidetik (2 detik)
+        } else {
+          // Tindakan yang perlu dilakukan jika gagal
+          alert("Failed to disconnect.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+</script>
+{% endblock myjs %}
