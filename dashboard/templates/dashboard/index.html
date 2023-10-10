@@ -285,7 +285,7 @@
       <div class="card dark:bg-zinc-800 dark:border-zinc-600 overflow-hidden">
         <div class="flex items-center p-5 gap-2 bg-slate-50 dark:bg-zinc-900">
           <i data-feather="briefcase" class="dark:stroke-white"></i>
-          <h1 class="text-lg font-normal dark:text-white">Broker Partner</h1>
+          <h1 class="text-lg font-normal dark:text-white">Brokerage Partner</h1>
         </div>
         <div class="flex flex-col lg:flex-row justify-center items-center">
           <div class="flex flex-col lg:flex-row justify-center items-center mb-[1.25rem] lg:w-1/2">
@@ -361,11 +361,11 @@
 
       <div class="card dark:bg-zinc-800 dark:border-zinc-600 p-5">
         <div class="flex flex-col gap-2 md:flex-row">
-        {% for ad in ads %}
+          {% for ad in ads %}
           <div class="md:w-1/2">
             <img src="{{ ad.image.url }}" alt="Ad image" />
           </div>
-         {% endfor %}
+          {% endfor %}
         </div>
       </div>
 
